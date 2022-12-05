@@ -5,16 +5,20 @@ you can use attribute selectors in querySelector() to select the <input> element
 example output: Your name is Luke Skywalker
  */
 
+const submitButton = document.querySelector("#submit");
 
-function getFormvalue()
+submitButton.addEventListener("click", submitForm, false);
+
+function getFormValue()
 {
-  var x=document.getElementById("source");
-  for (var i=0;i<x.length;i++)
-  {
-   if (x.elements[i].value!='Submit')
-    {
-      console.log(x.elements[i].value);
-     }
-   }
+  let x = document.getElementById("source");
+  let firstName = x.elements[0].value;
+  let lastName = x.elements[1].value;
+  return {firstName, lastName};
 }
-getFormvalue()
+function submitForm (event) {
+    event.preventDefault();
+    let {firstName, lastName} = getFormValue();
+    let p = document.getElementById('target');
+    p.innerHTML = `Your name is ${firstName} ${lastName}`
+}
